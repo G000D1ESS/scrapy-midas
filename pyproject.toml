@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "midas"
+version = "0.1.0"
+description = ""
+authors = ["GODLESS"]
+
+[tool.poetry.dependencies]
+python = "^3.7"
+Scrapy = "^2.5.0"
+ujson = "^4.0.2"
+pydantic = "^1.8.1"
+more-itertools = "^8.7.0"
+Js2Py = "^0.71"
+extruct = "^0.12.0"
+spidermon = "^1.15.0"
+price-parser = "^0.3.4"
+dateparser = "^1.0.0"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
