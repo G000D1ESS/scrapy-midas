@@ -20,7 +20,7 @@ itemadapter==0.2.0; python_version >= "3.6"
 itemloaders==1.0.4; python_version >= "3.6"
 jmespath==0.10.0; python_version >= "3.6" and python_full_version < "3.0.0" or python_full_version >= "3.3.0" and python_version >= "3.6"
 js2py==0.71
-spidermon=1.15.0
+spidermon==1.15.0
 jstyleson==0.0.2
 lxml==4.6.3; python_version >= "3.6" and python_full_version < "3.0.0" or python_full_version >= "3.5.0" and python_version >= "3.6"
 mf2py==1.1.1
