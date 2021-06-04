@@ -25,6 +25,12 @@ FEED_EXPORT_ENCODING = 'utf-8'
 CONCURRENT_REQUESTS_PER_DOMAIN = 16
 CONCURRENT_REQUESTS_PER_IP = 16
 
+# MongoDB settings
+MONGODB_URI = config('MONGODB_URI')
+MONGODB_DATABASE = config('MONGODB_DATABASE')
+MONGODB_SEPARATE_COLLECTIONS = True
+MONGODB_ADD_TIMESTAMP = False
+
 # SpiderMon settings
 SPIDERMON_ENABLED = True
 SPIDERMON_VALIDATION_DROP_ITEMS_WITH_ERRORS = True
@@ -69,6 +75,7 @@ EXTENSIONS = {
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
     'spidermon.contrib.scrapy.pipelines.ItemValidationPipeline': 800,
+    'scrapy_mongodb.MongoDBPipeline': 900,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)

@@ -23,6 +23,7 @@ class HeadHunterSpider(Spider):
     user_agent = CHROME_USER_AGENT
     custom_settings = {
         'DOWNLOAD_TIMEOUT': 60,
+        'MONGODB_UNIQUE_KEY': 'vacancy_id',
         'SPIDERMON_VALIDATION_MODELS': (
             'midas.validators.HeadHunterItem',
         ),
