@@ -1,8 +1,13 @@
+import logging
+
 from spidermon import MonitorSuite, Monitor
 from spidermon.contrib.actions.telegram.notifiers import SendTelegramMessageSpiderFinished
 from spidermon.contrib.monitors.mixins import StatsMonitorMixin
 from spidermon.contrib.scrapy.monitors import ErrorCountMonitor, UnwantedHTTPCodesMonitor
 from spidermon.decorators import monitors
+
+
+logging.getLogger('requests').setLevel('INFO')
 
 
 @monitors.name('Item validation')
