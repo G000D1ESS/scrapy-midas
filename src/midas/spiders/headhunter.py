@@ -56,8 +56,8 @@ class HeadHunterSpider(Spider):
             yield response.follow(url=next_page, callback=self.parse)
 
     def parse_vacancy(self, response):
-        vacancy_id = response.xpath('//input[@name="vacancyId"]/@value').get()
-        vacancy_id = vacancy_id or url_query_cleaner(response.url).rstrip('/').rpartition('/')[-1]
+        offer_id = response.xpath('//input[@name="vacancyId"]/@value').get()
+        offer_id = offer_id or url_query_cleaner(response.url).rstrip('/').rpartition('/')[-1]
 
         tags = response.xpath('//div[@class="bloko-tag-list"]//span/text()').getall()
         tags = [tag.strip().lower() for tag in tags if tag.strip()]
@@ -67,7 +67,7 @@ class HeadHunterSpider(Spider):
         created_at = dateparser.parse(created_at.group()) if created_at else None
 
         yield {
-            'offer_id': int(vacancy_id),
+            'offer_id': int(offer_id),
             'title': remove_tags(response.xpath('//h1[@data-qa="vacancy-title"]').get('')),
             'url': url_query_cleaner(response.url),
             'company': self.get_company_info(response),
