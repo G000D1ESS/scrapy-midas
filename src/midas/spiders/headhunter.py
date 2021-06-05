@@ -30,6 +30,7 @@ class HeadHunterSpider(Spider):
         'ITEM_PIPELINES': {
             'midas.pipelines.DuplicatesOfferPipeline': 300,
             'midas.pipelines.PydanticPipeline': 325,
+            'scrapy_mongodb.MongoDBPipeline': 350,
         },
     }
 
@@ -64,6 +65,7 @@ class HeadHunterSpider(Spider):
             'company': self.get_company_info(response),
             'city': response.xpath('//p[@data-qa="vacancy-view-location"]/text()').get(''),
             'salary': self.get_salary(response),
+            'info': self.get_offer_info(response),
             'created_at': created_at,
             'tags': tags,
         }
@@ -97,3 +99,9 @@ class HeadHunterSpider(Spider):
             'name': remove_tags(company.xpath('./*').get()),
             'url': response.urljoin(company.xpath('./@href').get())
         }
+
+    @staticmethod
+    def get_offer_info(response):
+        description = remove_tags(response.xpath('//div[@data-qa="vacancy-description"]').get('')).strip()
+        address = remove_tags(response.xpath('//span[@data-qa="vacancy-view-raw-address"]').get('')).strip()
+        return {'description': description, 'address': address}
