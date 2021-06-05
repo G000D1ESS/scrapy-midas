@@ -10,7 +10,7 @@ class Company(BaseModel):
 
 
 class Salary(BaseModel):
-    value: int = 'Не указанна'
+    value: float = 0
     maximum: float = 0
     minimum: float = 0
 
