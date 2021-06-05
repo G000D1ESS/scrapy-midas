@@ -1,5 +1,6 @@
 from datetime import datetime
 import re
+from itertools import product
 from urllib.parse import urlencode
 
 import dateparser
@@ -7,13 +8,20 @@ from scrapy import Spider, Request
 from w3lib.html import remove_tags, replace_entities
 from w3lib.url import url_query_cleaner
 
+
 CHROME_USER_AGENT = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 ' \
                     'Safari/537.36 '
 
-
-# Поисковые запросы
+# Search Settings
 SEARCH_QUERIES = ['Scrapy', 'Python', 'Django', 'Scraping', 'Brandquad', 'Scrapy Developer']
+SEARCH_REGIONS = ['Moscow', 'Saint-Petersburg', 'Volgograd']
 
+# Regions settings
+REGIONS_SETTINGS = {
+    'Moscow': {'domain': 'hh.ru', 'city_id': 1},
+    'Saint-Petersburg': {'domain': 'spb.hh.ru', 'city_id': 2},
+    'Volgograd': {'domain': 'volgograd.hh.ru', 'city_id': 24},
+}
 
 # Regex
 SALARY_REGEX = re.compile(r'(от(?P<minimum>\d+))?(до(?P<maximum>\d+))?', re.IGNORECASE)
@@ -35,8 +43,8 @@ class HeadHunterSpider(Spider):
     }
 
     def start_requests(self):
-        for query in SEARCH_QUERIES:
-            yield Request(url=self.build_search_url(query=query), callback=self.parse)
+        for query, region in product(SEARCH_QUERIES, SEARCH_REGIONS):
+            yield Request(url=self.build_search_url(query=query, region=region), callback=self.parse)
 
     def parse(self, response):
         urls = response.xpath('//div[has-class("vacancy-serp-item")]//a[contains(@href, "/vacancy/")]/@href')
@@ -71,16 +79,17 @@ class HeadHunterSpider(Spider):
         }
 
     @staticmethod
-    def build_search_url(query: str, city_id: int = 1) -> str:
+    def build_search_url(query: str, region: str = 'Moscow') -> str:
+        region = REGIONS_SETTINGS[region]
         params = {
             'clusters': True,
-            'area': city_id,
+            'area': region['city_id'],
             'st': 'searchVacancy',
             'text': query,
             'customDomain': 1,
         }
         query = urlencode(params, doseq=True)
-        return f'https://hh.ru/search/vacancy?{query}'
+        return f'https://{region["domain"]}/search/vacancy?{query}'
 
     @staticmethod
     def get_salary(response):
