@@ -48,14 +48,14 @@ class HeadHunterSpider(Spider):
 
     def parse(self, response):
         urls = response.xpath('//div[has-class("vacancy-serp-item")]//a[contains(@href, "/vacancy/")]/@href')
-        yield from response.follow_all(urls=urls, callback=self.parse_vacancy)
+        yield from response.follow_all(urls=urls, callback=self.parse_offer)
 
         # Pagination
         next_page = response.xpath('//div[@data-qa="pager-block"]//a[@data-qa="pager-next"]/@href').get()
         if next_page:
             yield response.follow(url=next_page, callback=self.parse)
 
-    def parse_vacancy(self, response):
+    def parse_offer(self, response):
         offer_id = response.xpath('//input[@name="vacancyId"]/@value').get()
         offer_id = offer_id or url_query_cleaner(response.url).rstrip('/').rpartition('/')[-1]
 
