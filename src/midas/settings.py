@@ -73,10 +73,9 @@ EXTENSIONS = {
 
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
-ITEM_PIPELINES = {
-    'spidermon.contrib.scrapy.pipelines.ItemValidationPipeline': 800,
-    'scrapy_mongodb.MongoDBPipeline': 900,
-}
+# ITEM_PIPELINES = {
+#     'scrapy_mongodb.MongoDBPipeline': 900,
+# }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/autothrottle.html
