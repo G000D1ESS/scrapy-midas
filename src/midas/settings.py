@@ -1,9 +1,15 @@
+import logging
+
 from decouple import config
 
 BOT_NAME = 'midas'
 
 SPIDER_MODULES = ['midas.spiders']
 NEWSPIDER_MODULE = 'midas.spiders'
+
+# Configure logging levels
+logging.getLogger('pymongo').setLevel('INFO')
+logging.getLogger('requests').setLevel('INFO')
 
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
