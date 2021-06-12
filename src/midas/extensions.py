@@ -11,7 +11,7 @@ class SearchQueriesMongoDB:
         self.database = database
         self.collection = collection
         self.mongodb_uri = mongodb_uri
-        self.logger = logging.getLogger(__name__)
+        self.logger = logging.getLogger('search-queries-mongodb')
 
     @classmethod
     def from_crawler(cls, crawler):
