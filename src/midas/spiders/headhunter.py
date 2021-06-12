@@ -12,10 +12,6 @@ from w3lib.url import url_query_cleaner
 CHROME_USER_AGENT = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 ' \
                     'Safari/537.36 '
 
-# Search Settings
-SEARCH_QUERIES = ['Scrapy', 'Python', 'Django', 'Scraping', 'Brandquad', 'Scrapy Developer']
-SEARCH_REGIONS = ['Moscow', 'Saint-Petersburg', 'Volgograd']
-
 # Regions settings
 REGIONS_SETTINGS = {
     'Moscow': {'domain': 'hh.ru', 'city_id': 1},
@@ -43,8 +39,9 @@ class HeadHunterSpider(Spider):
     }
 
     def start_requests(self):
-        for query, region in product(SEARCH_QUERIES, SEARCH_REGIONS):
-            yield Request(url=self.build_search_url(query=query, region=region), callback=self.parse)
+        for query_data in getattr(self, 'search_queries', []):
+            url = self.build_search_url(query=query_data['query'], region=query_data['region'])
+            yield Request(url=url, callback=self.parse)
 
     def parse(self, response):
         urls = response.xpath('//div[has-class("vacancy-serp-item")]//a[contains(@href, "/vacancy/")]/@href')

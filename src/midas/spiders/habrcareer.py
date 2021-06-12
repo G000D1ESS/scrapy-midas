@@ -10,9 +10,6 @@ from w3lib.url import url_query_cleaner
 CHROME_USER_AGENT = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 ' \
                     'Safari/537.36 '
 
-# Search Settings
-SEARCH_QUERIES = ['Scrapy', 'Python', 'Django', 'Scraping', 'Brandquad', 'Scrapy Developer']
-
 
 class HabrCareerSpider(Spider):
     name = 'habrcareer'
@@ -29,8 +26,8 @@ class HabrCareerSpider(Spider):
     }
 
     def start_requests(self):
-        for query in SEARCH_QUERIES:
-            yield Request(url=self.build_search_url(query=query), callback=self.parse)
+        for query_data in getattr(self, 'search_queries', []):
+            yield Request(url=self.build_search_url(query=query_data['query']), callback=self.parse)
 
     def parse(self, response):
         urls = response.xpath('//div[has-class("vacancy-card")]//a[contains(@href, "/vacancies/")]/@href')
