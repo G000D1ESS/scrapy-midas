@@ -33,6 +33,7 @@ pyasn1-modules==0.2.8; python_version >= "3.6"
 pyasn1==0.4.8; python_version >= "3.6"
 pycparser==2.20; python_version >= "3.6" and python_full_version < "3.0.0" or python_full_version >= "3.4.0" and python_version >= "3.6"
 pydantic==1.8.1; python_full_version >= "3.6.1"
+dnspython==2.1.0
 pydispatcher==2.0.5; platform_python_implementation == "CPython" and python_version >= "3.6"
 pyjsparser==2.7.1
 pyopenssl==20.0.1; python_version >= "3.6" and python_full_version < "3.0.0" or python_full_version >= "3.5.0" and python_version >= "3.6"
