@@ -37,6 +37,11 @@ MONGODB_DATABASE = config('MONGODB_DATABASE')
 MONGODB_SEPARATE_COLLECTIONS = True
 MONGODB_ADD_TIMESTAMP = False
 
+# Search Queries from MongoDB settings
+SEARCH_QUERIES_MONGODB_URI = MONGODB_URI
+SEARCH_QUERIES_DATABASE = MONGODB_DATABASE
+SEARCH_QUERIES_COLLECTION = 'search_queries'
+
 # SpiderMon settings
 SPIDERMON_ENABLED = True
 SPIDERMON_VALIDATION_DROP_ITEMS_WITH_ERRORS = True
@@ -74,7 +79,8 @@ DEFAULT_REQUEST_HEADERS = {
 # Enable or disable extensions
 # See https://docs.scrapy.org/en/latest/topics/extensions.html
 EXTENSIONS = {
-   'spidermon.contrib.scrapy.extensions.Spidermon': 500,
+    'midas.extensions.SearchQueriesMongoDB': 450,
+    'spidermon.contrib.scrapy.extensions.Spidermon': 500,
 }
 
 # Configure item pipelines
