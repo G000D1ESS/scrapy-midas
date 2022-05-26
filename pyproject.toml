@@ -7,7 +7,7 @@ authors = ["GODLESS"]
 [tool.poetry.dependencies]
 python = "^3.7"
 Scrapy = "^2.5.0"
-ujson = "^4.0.2"
+ujson = "^5.2.0"
 pydantic = "^1.8.1"
 more-itertools = "^8.7.0"
 Js2Py = "^0.71"
