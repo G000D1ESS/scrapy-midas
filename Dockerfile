@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1
-FROM debian:latest
+FROM debian:bullseye
 
 # Setup Rust
 RUN apt-get update && apt-get install -y build-essential curl \
