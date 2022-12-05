@@ -1,0 +1,11 @@
+services:
+  scrapy:
+    build: .
+    depends_on:
+      - mongodb
+    env_file:
+      - .env
+  mongodb:
+    image: mongo:5.0.14
+    volumes:
+      - ./mongodb:/data/db
