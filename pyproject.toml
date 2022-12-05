@@ -15,6 +15,10 @@ extruct = "^0.12.0"
 spidermon = "^1.15.0"
 price-parser = "^0.3.4"
 dateparser = "^1.0.0"
+python-decouple = "^3.6"
+pymongo = "3.11.4"
+jinja2 = "^3.1.2"
+scrapy-mongodb = "^0.12.0"
 
 [tool.poetry.dev-dependencies]
 
