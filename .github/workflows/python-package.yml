@@ -12,9 +12,9 @@ on:
 jobs:
   build:
 
-    runs-on: ubuntu-latest
+    runs-on: debian-latest
     strategy:
-      fail-fast: false
+      fail-fast: true
       matrix:
         python-version: [3.7]
 
