@@ -2,7 +2,7 @@
 name = "midas"
 version = "0.1.0"
 description = ""
-authors = ["GODLESS"]
+authors = ["G000D1ESS"]
 
 [tool.poetry.dependencies]
 python = "^3.7"
