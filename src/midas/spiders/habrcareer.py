@@ -39,7 +39,7 @@ class HabrCareerSpider(Spider):
             yield response.follow(url=next_page, callback=self.parse)
 
     def parse_offer(self, response):
-        page_data = extruct.extract(response.text)
+        page_data = extruct.extract(response.text, syntaxes=['json-ld'])
         offer_data = next(item for item in page_data['json-ld'] if item.get('@type') == 'JobPosting')
 
         city = offer_data['jobLocation']
